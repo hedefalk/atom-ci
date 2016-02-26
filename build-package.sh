@@ -101,6 +101,7 @@ fi
 if [ -d ./spec ]; then
   echo "Running specs..."
   "$ATOM_SCRIPT_PATH" --test spec
+  "$ATOM_SCRIPT_PATH" --test spec-integration
 else
   echo "Missing spec folder! Please consider adding a test suite in `./spec`"
   exit 1
