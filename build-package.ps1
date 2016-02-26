@@ -166,15 +166,15 @@ function RunLinters() {
     }
 }
 
-function RunSpecs() {
-    $specpath = "$script:PACKAGE_FOLDER\spec"
+function RunSpecs($specfolder) {
+    $specpath = "$script:PACKAGE_FOLDER\$specfolder"
     $specpathexists = Test-Path $specpath
     if (!$specpathexists) {
         Write-Host "Missing spec folder! Please consider adding a test suite in '.\spec'"
         ExitWithCode -exitcode 1
     }
     Write-Host "Running specs..."
-    & "$script:ATOM_EXE_PATH" --test spec 2>&1 | %{ "$_" }
+    & "$script:ATOM_EXE_PATH" --test "$specfolder" 2>&1 | %{ "$_" }
     if ($LASTEXITCODE -ne 0) {
         Write-Host "Specs Failed"
         ExitWithCode -exitcode $LASTEXITCODE
@@ -210,4 +210,5 @@ SetElectronEnvironmentVariables
 PrintVersions
 InstallPackage
 RunLinters
-RunSpecs
+RunSpecs("spec")
+RunSpecs("spec-integration")
