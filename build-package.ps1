@@ -211,4 +211,3 @@ PrintVersions
 InstallPackage
 RunLinters
 RunSpecs("spec")
-RunSpecs("spec-integration")
